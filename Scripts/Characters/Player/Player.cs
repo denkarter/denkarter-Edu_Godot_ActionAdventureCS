@@ -1,8 +1,12 @@
 using Godot;
-using System;
+
+namespace Edu_Godot_ActionAdventureCS.Scripts.Characters.Player;
 
 public partial class Player : CharacterBody3D
 {
+	[ExportGroup("Required Nodes")]
+	[Export] private AnimationPlayer _animationPlayerNode;
+	[Export] private Sprite3D _playerSprite3DNode;
 	public float MoveSpeed = 5f;
 	
 	private StringName _negativeX = "MoveLeft";

@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace Edu_Godot_ActionAdventureCS.Scripts.Scenes;
 
 public partial class Main : Node3D
 {
