@@ -88,13 +88,17 @@ _data = {
 "RESET": SubResource("Animation_bnyxf")
 }
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_animationPlayerNode", "_playerSprite3DNode")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_animationPlayerNode")]
 script = ExtResource("1_iulca")
 _animationPlayerNode = NodePath("AnimationPlayer")
-_playerSprite3DNode = NodePath("Sprite3D")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 texture = ExtResource("1_hkt5u")
+
+[node name="LabelNode" type="Label" parent="Sprite3D"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Text of Node"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
