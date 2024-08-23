@@ -1,3 +1,4 @@
+using Edu_Godot_ActionAdventureCS.Scripts.General;
 using Godot;
 
 namespace Edu_Godot_ActionAdventureCS.Scripts.Characters.Player;
@@ -6,23 +7,20 @@ public partial class Player : CharacterBody3D
 {
 	[ExportGroup("Required Nodes")]
 	[Export] private AnimationPlayer _animationPlayerNode;
-	private Sprite3D _playerSprite3DNode;
-	private Label _labelNode;
 	public float MoveSpeed = 5f;
 	
-	private StringName _negativeX = "MoveLeft";
-	private StringName _positiveX = "MoveRight";
-	private StringName _negativeY = "MoveForward";
-	private StringName _positiveY = "MoveBackward";
+	private Sprite3D _playerSprite3DNode;
+	private Label _labelNode;
+
 	private Vector2 _direction = Vector2.Zero;
-	private StringName _idleAnimation = "Idle";
-	private StringName _moveAnimation = "Move";
+	private NodePath _sprite3dNodePath = "Sprite3D";
+	private NodePath _sprite3dLabelNodePath = "Sprite3D/LabelNode";
 
 	public override void _Ready()
 	{
-		_playerSprite3DNode = GetNode<Sprite3D>("Sprite3D");
+		_playerSprite3DNode = GetNode<Sprite3D>(_sprite3dNodePath);
 		GD.Print(_playerSprite3DNode.Name);
-		_labelNode = GetNode<Label>("Sprite3D/LabelNode");
+		_labelNode = GetNode<Label>(_sprite3dLabelNodePath);
 		GD.Print(_labelNode.Name);
 	}
 
@@ -34,16 +32,16 @@ public partial class Player : CharacterBody3D
 
 	public override void _Input(InputEvent @event)
 	{
-		_direction = Input.GetVector(_negativeX, _positiveX,
-			_negativeY, _positiveY);
+		_direction = Input.GetVector(GameConstants.InputMoveLeft, GameConstants.InputMoveRight,
+			GameConstants.InputMoveForward, GameConstants.InputMoveBackward);
 
 		if (_direction == Vector2.Zero)
 		{
-			_animationPlayerNode.Play(_idleAnimation);
+			_animationPlayerNode.Play(GameConstants.AnimIdle);
 		}
 		else
 		{
-			_animationPlayerNode.Play(_moveAnimation);
+			_animationPlayerNode.Play(GameConstants.AnimMove);
 		}
 	}
 }
