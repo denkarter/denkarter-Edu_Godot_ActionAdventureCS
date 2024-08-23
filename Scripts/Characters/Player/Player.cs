@@ -3,13 +3,23 @@ using System;
 
 public partial class Player : CharacterBody3D
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	public float MoveSpeed = 5f;
+	
+	private StringName _negativeX = "MoveLeft";
+	private StringName _positiveX = "MoveRight";
+	private StringName _negativeY = "MoveForward";
+	private StringName _positiveY = "MoveBackward";
+	private Vector2 _direction = Vector2.Zero;
+
+	public override void _PhysicsProcess(double delta)
 	{
+		Velocity = (new Vector3(_direction.X, 0, _direction.Y)) * MoveSpeed;
+		MoveAndSlide();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _Input(InputEvent @event)
 	{
+		_direction = Input.GetVector(_negativeX, _positiveX,
+			_negativeY, _positiveY);
 	}
 }
